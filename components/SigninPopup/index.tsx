@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 // next
 import type { NextPage } from "next";
+// ui
+import { CloseOutlined, SendOutlined, GithubOutlined } from "@ant-design/icons";
 // other
 import styles from "./index.module.scss";
+// component
+import CountDown from "components/CountDown";
 
 type SigninPopupProps = {
   isShow?: boolean;
@@ -22,6 +26,7 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     phone: "",
     verify: "",
   });
+  const [isVerify, setIsVerify] = useState<boolean>(false);
 
   const handleClose = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
@@ -32,6 +37,11 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     e.preventDefault();
+    setIsVerify(true);
+  };
+
+  const handleCountDownEnd = () => {
+    setIsVerify(false);
   };
 
   const handleSign = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -42,15 +52,23 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     e.preventDefault();
   };
 
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
   if (!isShow) return null;
   return (
     <div className={styles.loginArea}>
       <div className={styles.loginBox}>
         {/* title */}
         <div className={styles.loginTitle}>
-          <div>Signin</div>
+          <div>Sign In</div>
           <div className={styles.close} onClick={handleClose}>
-            x
+            <CloseOutlined />
           </div>
         </div>
         {/* phone */}
@@ -59,6 +77,7 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
           name={"phone"}
           type={"text"}
           placeholder={"Phone number"}
+          onChange={handleFormChange}
         />
         {/* verify */}
         <div className={styles.verifyCodeArea}>
@@ -66,10 +85,15 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
             value={form.verify}
             name={"verify"}
             type={"text"}
-            placeholder={"Verification"}
+            placeholder={"Text message"}
+            onChange={handleFormChange}
           />
-          <span onClick={handleGetVerifyCode} className={styles.verifyCode}>
-            SMS
+          <span className={styles.verifyCode}>
+            {isVerify ? (
+              <CountDown time={10} onEnd={handleCountDownEnd} />
+            ) : (
+              <SendOutlined onClick={handleGetVerifyCode} />
+            )}
           </span>
         </div>
         {/* btns */}
@@ -77,7 +101,10 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
           Signin
         </div>
         <div onClick={handleOAuth} className={styles.otherLogin}>
-          Github login
+          <span>
+            Github&nbsp;&nbsp;
+            <GithubOutlined />
+          </span>
         </div>
         <div className={styles.loginPrivacy}>
           <a
