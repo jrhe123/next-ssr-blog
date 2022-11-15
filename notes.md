@@ -1,8 +1,12 @@
+### Juejin.cn Clone
+
 ### Setup
 1. linters
 2. mock.js
 https://github.com/nuysoft/Mock/wiki/Getting-Started
 
+### UI - Antd
+https://ant.design/
 
 ### Next Routes
 1. index
