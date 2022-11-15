@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // next
 import type { NextPage } from "next";
 // ui
+import { message } from "antd";
 import { CloseOutlined, SendOutlined, GithubOutlined } from "@ant-design/icons";
 // other
 import styles from "./index.module.scss";
@@ -37,6 +38,11 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     e.preventDefault();
+    const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    if (!form.phone || !form.phone.match(regex)) {
+      message.warning("Please enter your phone number");
+      return;
+    }
     setIsVerify(true);
   };
 
