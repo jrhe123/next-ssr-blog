@@ -33,7 +33,7 @@ const Navbar: NextPage = () => {
 
   return (
     <div className={styles.navbar}>
-      <section className={styles.logoArea}>稀土掘金</section>
+      <section className={styles.logoArea}>Rare Earth</section>
       <section className={styles.linkArea}>
         {navs?.map((nav, index) => (
           <Link key={index} href={nav?.value} legacyBehavior>
