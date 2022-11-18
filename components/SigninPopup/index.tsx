@@ -21,7 +21,8 @@ type SigninForm = {
 };
 type APIResponse = {
   code: number;
-  message: string;
+  data?: object;
+  message?: string;
 };
 
 const SigninPopup: NextPage<SigninPopupProps> = ({
@@ -65,8 +66,16 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     setIsVerify(false);
   };
 
-  const handleSign = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleSign = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+    const response: APIResponse = await request.post("/api/user/login", {
+      ...form,
+    });
+    if (response.code !== 0) {
+      message.error(response.message || "API error");
+    }
+    console.log("success");
+    onClose && onClose();
   };
 
   const handleOAuth = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {

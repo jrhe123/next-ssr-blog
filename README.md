@@ -9,6 +9,10 @@ https://github.com/nuysoft/Mock/wiki/Getting-Started
 ### UI - Antd
 https://ant.design/
 
+### FERE DB Services
+MYSQL: remotemysql.com
+MONGODB: account.mongodb.com
+
 ### Next Routes
 1. index \
 pages/index.js -> / \
