@@ -7,6 +7,7 @@ import { message } from "antd";
 import { CloseOutlined, SendOutlined, GithubOutlined } from "@ant-design/icons";
 // other
 import styles from "./index.module.scss";
+import request from "service/fetch";
 // component
 import CountDown from "components/CountDown";
 
@@ -17,6 +18,10 @@ type SigninPopupProps = {
 type SigninForm = {
   phone: string;
   verify: string;
+};
+type APIResponse = {
+  code: number;
+  message: string;
 };
 
 const SigninPopup: NextPage<SigninPopupProps> = ({
@@ -34,7 +39,7 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     onClose();
   };
 
-  const handleGetVerifyCode = (
+  const handleGetVerifyCode = async (
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     e.preventDefault();
@@ -43,7 +48,17 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
       message.warning("Please enter your phone number");
       return;
     }
-    setIsVerify(true);
+    const response: APIResponse = await request.post(
+      "/api/user/sendVerifyCode",
+      {
+        to: form.phone,
+      }
+    );
+    if (response.code === 0) {
+      setIsVerify(true);
+    } else {
+      message.error(response.message || "API error");
+    }
   };
 
   const handleCountDownEnd = () => {
@@ -81,7 +96,7 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
         <input
           value={form.phone}
           name={"phone"}
-          type={"text"}
+          type={"number"}
           placeholder={"Phone number"}
           onChange={handleFormChange}
         />
@@ -93,12 +108,13 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
             type={"text"}
             placeholder={"Text message"}
             onChange={handleFormChange}
+            maxLength={4}
           />
           <span className={styles.verifyCode}>
             {isVerify ? (
               <CountDown time={10} onEnd={handleCountDownEnd} />
             ) : (
-              <SendOutlined onClick={handleGetVerifyCode} />
+              <SendOutlined onClick={(e) => handleGetVerifyCode(e)} />
             )}
           </span>
         </div>

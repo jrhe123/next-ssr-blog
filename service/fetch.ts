@@ -11,8 +11,8 @@ requestInstance.interceptors.request.use(
 
 requestInstance.interceptors.response.use(
   (response) => {
-    if (response.status === 200) {
-      return response.data;
+    if (response?.status === 200) {
+      return response?.data;
     } else {
       return {
         code: -1,
