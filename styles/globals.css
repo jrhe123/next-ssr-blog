@@ -1,7 +1,9 @@
 @import "antd/dist/antd.css";
+@import "https://fonts.cdnfonts.com/css/pacifico";
 
 body {
   background-color: aliceblue;
+  font-family: Pacifico, sans-serif;
 }
 
 .content-layout {

@@ -70,6 +70,7 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     e.preventDefault();
     const response: APIResponse = await request.post("/api/user/login", {
       ...form,
+      identity_type: "phone",
     });
     if (response.code !== 0) {
       message.error(response.message || "API error");
