@@ -24,6 +24,7 @@ type APIResponse = {
   data?: object;
   message?: string;
 };
+const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 
 const SigninPopup: NextPage<SigninPopupProps> = ({
   isShow = false,
@@ -44,7 +45,6 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
     if (!form.phone || !form.phone.match(regex)) {
       message.warning("Please enter your phone number");
       return;
@@ -57,6 +57,7 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
     );
     if (response.code === 0) {
       setIsVerify(true);
+      message.success("Code sent");
     } else {
       message.error(response.message || "API error");
     }
@@ -68,15 +69,29 @@ const SigninPopup: NextPage<SigninPopupProps> = ({
 
   const handleSign = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+    handleCountDownEnd();
+    if (!form.phone || !form.phone.match(regex)) {
+      message.warning("Please enter your phone number");
+      return;
+    }
+    if (!form.verify || form.verify.length !== 4) {
+      message.warning("Please enter your 4 digit verify code");
+      return;
+    }
     const response: APIResponse = await request.post("/api/user/login", {
       ...form,
       identity_type: "phone",
     });
     if (response.code !== 0) {
       message.error(response.message || "API error");
+    } else {
+      message.success(response.message);
+      setForm({
+        phone: "",
+        verify: "",
+      });
+      onClose && onClose();
     }
-    console.log("success");
-    onClose && onClose();
   };
 
   const handleOAuth = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {

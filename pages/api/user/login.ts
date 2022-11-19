@@ -26,15 +26,50 @@ const handler = async (
     });
   }
   const db = await prepareConnection();
-  const userRepository = db.getRepository(User);
   const userAuthRepository = db.getRepository(UserAuth);
-  const users = await userRepository.find();
-  // AppDataSource.manager.save()
-
-  console.log("users: ", users);
-
+  let userAuth = await userAuthRepository.findOne(
+    {
+      identity_type,
+      identifier: phone,
+    },
+    {
+      relations: ["user"],
+    }
+  );
+  // if user auth not exists, register now
+  if (!userAuth) {
+    // user
+    const user = new User();
+    user.nickname = `User_${Math.floor(Math.random() * 10000)}`;
+    // public folder
+    // user.avatar = "/images/avatar.jpeg";
+    user.avatar = "https://loremflickr.com/240/240";
+    user.job = "developer";
+    user.introduce = "";
+    // userAuth
+    userAuth = new UserAuth();
+    userAuth.identity_type = identity_type;
+    userAuth.identifier = phone;
+    userAuth.credential = session.verifyCode;
+    userAuth.user = user;
+    await userAuthRepository.save(userAuth);
+  }
+  // save user info into session
+  const userRes = userAuth.user;
+  const { id, nickname, avatar } = userRes;
+  session.userId = id;
+  session.nickname = nickname;
+  session.avatar = avatar;
+  await session.save();
+  // response
   return res.status(200).json({
     code: 0,
+    message: "logged in",
+    data: {
+      userId: id,
+      nickname,
+      avatar,
+    },
   });
 };
 
