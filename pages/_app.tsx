@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 //
-import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import App, { AppContext } from "next/app";
 //
@@ -25,11 +24,18 @@ type IRequest = IncomingMessage & {
 };
 
 const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
-  const { store, props } = wrapper.useWrappedStore(rest);
-  const { pageProps, user } = props;
-
-  console.log("hit !!!!!!!!: ", user);
-  useEffect(() => {}, []);
+  const { store, props } = wrapper.useWrappedStore({
+    ...rest,
+    // pass it to hydrate slice & assign to reducer
+    pageProps: {
+      initialState: {
+        user: {
+          user: rest.user,
+        },
+      },
+    },
+  });
+  const { pageProps } = props;
 
   return (
     <Provider store={store}>
@@ -41,25 +47,21 @@ const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
 };
 
 MyCustomApp.getInitialProps = async (context: AppContext) => {
-  const ctx = await App.getInitialProps(context);
+  const appProps = await App.getInitialProps(context);
   const req = context?.ctx?.req as IRequest;
   let userId = "",
     nickname = "",
     avatar = "";
+  // fetch user info from request cookies
   if (req) {
     const cookies: Record<string, any> = req.cookies;
-    console.log("!!!!!!!!! in _app getInitialProps");
-    console.log("!!!!!!!!! in _app getInitialProps");
-    console.log("!!!!!!!!! in _app getInitialProps");
-    console.log("!!!!!!!!! in _app getInitialProps");
-    console.log("!!!!!!!!! in _app getInitialProps");
-    console.log("!!!!!!!!! in _app getInitialProps");
     userId = cookies.userId;
     nickname = cookies.nickname;
     avatar = cookies.avatar;
   }
+  // return to MyCustomApp props
   return {
-    ...ctx,
+    ...appProps,
     user: {
       userId,
       nickname,

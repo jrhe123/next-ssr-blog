@@ -4,19 +4,16 @@ import { wrapper } from "store";
 import { END } from "redux-saga";
 
 const Home: NextPage = (props) => {
-  return <div>home page</div>;
+  return (
+    <div>
+      <p>tag page</p>
+    </div>
+  );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ query, req }) => {
-      console.log("+++++++ index page getServerSideProps");
-      console.log("+++++++ index page getServerSideProps");
-      console.log("+++++++ index page getServerSideProps");
-      console.log("+++++++ index page getServerSideProps");
-      console.log("+++++++ index page getServerSideProps");
-      console.log("+++++++ index page getServerSideProps");
-      console.log("+++++++ index page getServerSideProps");
       // store.dispatch(tickClock(false))
       // if (!store.getState().placeholderData) {
       //   store.dispatch(loadData())

@@ -11,6 +11,14 @@ const Tag: NextPage = () => {
   );
 };
 
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ query, req }) => {
+      return {
+        props: {},
+      };
+    }
+);
 // Tag.getInitialProps = wrapper.getInitialPageProps(
 //   (store) =>
 //     async ({ pathname, req, res }) => {

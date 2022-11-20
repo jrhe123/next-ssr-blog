@@ -65,17 +65,15 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(HYDRATE, (state, action) => {
-        // if (typeof window !== 'undefined') {
-        //   const storedLoggedInData = localStorage.getItem('loggedInData');
-        //   if (storedLoggedInData != null && storedLoggedInData) {
-        //     const parsedJson = JSON.parse(storedLoggedInData);
-        //     state.isLoggedIn = parsedJson.isLoggedIn ?? false;
-        //   } else {
-        //     state.isLoggedIn = false
-        //   }
-        // }
+        // use user info from cookie as initial values
+        const {
+          payload: {
+            user: { user },
+          },
+        } = action as any;
         const nextState = {
           ...state,
+          user,
         };
         return nextState;
       })
