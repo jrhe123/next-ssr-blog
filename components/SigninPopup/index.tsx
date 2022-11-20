@@ -7,7 +7,7 @@ import { message } from "antd";
 import { CloseOutlined, SendOutlined, GithubOutlined } from "@ant-design/icons";
 // other
 import styles from "./index.module.scss";
-import request from "service/fetch";
+import request from "libs/core/fetch";
 // component
 import CountDown from "components/CountDown";
 

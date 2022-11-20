@@ -1,32 +1,38 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { createLogger } from "redux-logger";
+import createSagaMiddleware from "@redux-saga/core";
+import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
+// logger
+import logger from "redux-logger";
 
-import counterReducer from "features/counter/counterSlice";
+// list of reducers
+import aboutReducer from "features/about/store/about.slice";
+// saga
+import { rootSaga } from "store/rootSaga";
 
-const middleware = [];
-if (process.env.NODE_ENV !== "production") {
-  middleware.push(createLogger());
-}
-const enhancers = [...middleware];
-
-export function makeStore() {
-  return configureStore({
-    reducer: { counter: counterReducer },
-    // middleware: enhancers,
+const makeStore = () => {
+  //
+  const sagaMiddleware = createSagaMiddleware();
+  const middlewares: any[] = [sagaMiddleware];
+  if (process.env.NODE_ENV !== "production") middlewares.push(logger);
+  //
+  const store = configureStore({
+    reducer: {
+      about: aboutReducer,
+    },
+    devTools: process.env.NODE_ENV !== "production",
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({ thunk: false, serializableCheck: false }).concat(
+        middlewares
+      ),
   });
-}
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
 
-const store = makeStore();
+// store
+export const store = makeStore();
+export const wrapper = createWrapper(makeStore, { debug: true });
 
-export type AppState = ReturnType<typeof store.getState>;
-
+// types
 export type AppDispatch = typeof store.dispatch;
-
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action<string>
->;
-
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
