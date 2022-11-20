@@ -15,6 +15,8 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<APIResponse>
 ) => {
+  if (req.method !== "POST")
+    return res.status(405).json({ code: -1, message: "Method Not Allowed" });
   const session: ISession = req.session;
   const { to = "" } = req.body;
   const {

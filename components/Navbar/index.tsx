@@ -10,7 +10,7 @@ import { Button } from "antd";
 import { navs } from "./config";
 import styles from "./index.module.scss";
 // components
-import SigninPopup from "components/SigninPopup";
+import SigninPopupContainer from "features/user/components/SigninPopupContainer";
 
 const Navbar: NextPage = () => {
   const { pathname } = useRouter();
@@ -50,7 +50,7 @@ const Navbar: NextPage = () => {
         </Button>
       </section>
       {/* popup */}
-      <SigninPopup isShow={isShowSignin} onClose={handleClose} />
+      <SigninPopupContainer isShow={isShowSignin} onClose={handleClose} />
     </div>
   );
 };

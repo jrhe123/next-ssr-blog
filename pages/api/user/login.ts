@@ -17,6 +17,8 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<APIResponse>
 ) => {
+  if (req.method !== "POST")
+    return res.status(405).json({ code: -1, message: "Method Not Allowed" });
   const session: ISession = req.session;
   const { phone = "", verify = "", identity_type = "phone" } = req.body;
   if (String(session.verifyCode) !== verify) {
@@ -53,6 +55,10 @@ const handler = async (
     userAuth.credential = session.verifyCode;
     userAuth.user = user;
     await userAuthRepository.save(userAuth);
+  } else {
+    await userAuthRepository.update(userAuth.id, {
+      credential: session.verifyCode,
+    });
   }
   // save user info into session
   const userRes = userAuth.user;
