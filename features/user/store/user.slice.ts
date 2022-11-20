@@ -57,6 +57,29 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
+    // fetch user
+    fetchUser(state, action: PayloadAction<User>) {
+      state.user = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(HYDRATE, (state, action) => {
+        // if (typeof window !== 'undefined') {
+        //   const storedLoggedInData = localStorage.getItem('loggedInData');
+        //   if (storedLoggedInData != null && storedLoggedInData) {
+        //     const parsedJson = JSON.parse(storedLoggedInData);
+        //     state.isLoggedIn = parsedJson.isLoggedIn ?? false;
+        //   } else {
+        //     state.isLoggedIn = false
+        //   }
+        // }
+        const nextState = {
+          ...state,
+        };
+        return nextState;
+      })
+      .addDefaultCase((state, action) => {});
   },
 });
 
@@ -68,6 +91,7 @@ export const userActions = {
   signinRequest: userSlice.actions.signinRequest,
   signinSucceeded: userSlice.actions.signinSucceeded,
   signinFailed: userSlice.actions.signinFailed,
+  fetchUser: userSlice.actions.fetchUser,
 };
 
 // Selectors

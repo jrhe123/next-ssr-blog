@@ -9,11 +9,7 @@ import {
 } from "redux-saga/effects";
 import { getVerifyCode, signin } from "features/user/api";
 import { userActions } from "features/user/store/user.slice";
-import {
-  User,
-  VerifyCodeFormInput,
-  SigninFormInput,
-} from "features/user/types";
+import { VerifyCodeFormInput, SigninFormInput } from "features/user/types";
 // antd
 import { message } from "antd";
 

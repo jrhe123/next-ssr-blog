@@ -5,16 +5,25 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // ui
-import { Button } from "antd";
+import { Button, Dropdown, Avatar, Menu } from "antd";
+import { LoginOutlined, HomeOutlined } from "@ant-design/icons";
 // others
 import { navs } from "./config";
 import styles from "./index.module.scss";
 // components
 import SigninPopupContainer from "features/user/components/SigninPopupContainer";
+// redux service
+import { useUserService } from "features/user";
+
+const menuItems = [
+  { label: "Profile", key: "&nbsp;profile", icon: <HomeOutlined /> },
+  { label: "Sign out", key: "&nbsp;signout", icon: <LoginOutlined /> },
+];
 
 const Navbar: NextPage = () => {
   const { pathname } = useRouter();
   const [isShowSignin, setIsShowSignin] = useState<boolean>(false);
+  const { user } = useUserService();
 
   const handleGoToEditorPage = (
     e: React.MouseEvent<HTMLElement, MouseEvent>
@@ -22,13 +31,22 @@ const Navbar: NextPage = () => {
     e.preventDefault();
   };
 
+  const handleClose = () => {
+    setIsShowSignin(false);
+  };
+
   const handleSignin = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     setIsShowSignin(true);
   };
 
-  const handleClose = () => {
-    setIsShowSignin(false);
+  const renderDropDownMenu = () => {
+    return (
+      <Menu>
+        <Menu.Item>Profile</Menu.Item>
+        <Menu.Item>Sign out</Menu.Item>
+      </Menu>
+    );
   };
 
   return (
@@ -44,10 +62,24 @@ const Navbar: NextPage = () => {
         ))}
       </section>
       <section className={styles.operationArea}>
+        {/* btn 1 */}
         <Button onClick={handleGoToEditorPage}>Post</Button>
-        <Button onClick={handleSignin} type={"primary"}>
-          SignIn
-        </Button>
+        {/* btn 2 */}
+        {user?.userId ? (
+          <>
+            <Dropdown menu={{ items: menuItems }} placement={"bottomLeft"}>
+              <Avatar
+                src={user.avatar}
+                size={32}
+                style={{ cursor: "pointer" }}
+              />
+            </Dropdown>
+          </>
+        ) : (
+          <Button onClick={handleSignin} type={"primary"}>
+            SignIn
+          </Button>
+        )}
       </section>
       {/* popup */}
       <SigninPopupContainer isShow={isShowSignin} onClose={handleClose} />

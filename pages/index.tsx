@@ -9,8 +9,14 @@ const Home: NextPage = (props) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
-    async ({ query }) => {
-      console.log("+++++++ getServerSideProps query: ", query);
+    async ({ query, req }) => {
+      console.log("+++++++ index page getServerSideProps");
+      console.log("+++++++ index page getServerSideProps");
+      console.log("+++++++ index page getServerSideProps");
+      console.log("+++++++ index page getServerSideProps");
+      console.log("+++++++ index page getServerSideProps");
+      console.log("+++++++ index page getServerSideProps");
+      console.log("+++++++ index page getServerSideProps");
       // store.dispatch(tickClock(false))
       // if (!store.getState().placeholderData) {
       //   store.dispatch(loadData())
@@ -27,10 +33,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // store.dispatch(setProfileData(`${data.first_name}`));
 
       return {
-        props: {
-          title: "my title",
-          content: "123",
-        },
+        props: {},
       };
     }
 );

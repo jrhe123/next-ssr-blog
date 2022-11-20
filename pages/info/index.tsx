@@ -16,9 +16,14 @@ const Info: NextPage<InfoProps> = () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps((store) => (params) => {
-  console.log("2. Page.getStaticProps uses the store to dispatch things");
+  // console.log("2. Page.getStaticProps uses the store to dispatch things");
   // store.dispatch({ type: "SET_NAME", payload: "Seymur" });
-  console.log("+++++++ getStaticProps params: ", params);
+  console.log("+++++++ info page getStaticProps");
+  console.log("+++++++ info page getStaticProps");
+  console.log("+++++++ info page getStaticProps");
+  console.log("+++++++ info page getStaticProps");
+  console.log("+++++++ info page getStaticProps");
+  console.log("+++++++ info page getStaticProps");
   return { props: { status: "online" } };
 });
 

@@ -13,6 +13,7 @@ export type UserServiceOperators = {
   user: User | null;
   getVerifyCode: (data: VerifyCodeFormInput) => void;
   signin: (data: SigninFormInput) => void;
+  fetchUser: (date: User) => void;
 };
 
 /**
@@ -33,6 +34,12 @@ export const useUserService = (): Readonly<UserServiceOperators> => {
     signin: useCallback(
       (form: SigninFormInput) => {
         dispatch(userActions.signinRequest(form));
+      },
+      [dispatch]
+    ),
+    fetchUser: useCallback(
+      (user: User) => {
+        dispatch(userActions.fetchUser(user));
       },
       [dispatch]
     ),

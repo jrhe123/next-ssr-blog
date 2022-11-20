@@ -1,11 +1,11 @@
-import type { NextPage } from 'next';
-import React from 'react';
+import type { NextPage } from "next";
+import React from "react";
 
-import Footer from 'components/Footer';
-import Navbar from 'components/Navbar';
+import Footer from "components/Footer";
+import Navbar from "components/Navbar";
 
 type LayoutProps = {
-  children: React.ReactNode,
+  children: React.ReactNode;
 };
 
 const Layout: NextPage<LayoutProps> = ({ children }) => (

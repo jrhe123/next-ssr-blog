@@ -6,6 +6,9 @@ import { ISession } from ".";
 // db
 import { prepareConnection } from "db";
 import { User, UserAuth } from "db/entity";
+// cookie
+import { Cookie } from "next-cookie";
+import { setCookie } from "utils";
 
 type APIResponse = {
   code: number;
@@ -20,6 +23,7 @@ const handler = async (
   if (req.method !== "POST")
     return res.status(405).json({ code: -1, message: "Method Not Allowed" });
   const session: ISession = req.session;
+  const cookie = Cookie.fromApiRoute(req, res);
   const { phone = "", verify = "", identity_type = "phone" } = req.body;
   if (String(session.verifyCode) !== verify) {
     return res.status(200).json({
@@ -67,6 +71,12 @@ const handler = async (
   session.nickname = nickname;
   session.avatar = avatar;
   await session.save();
+  // save user info into cookie
+  setCookie(cookie, {
+    userId: id,
+    nickname,
+    avatar,
+  });
   // response
   return res.status(200).json({
     code: 0,

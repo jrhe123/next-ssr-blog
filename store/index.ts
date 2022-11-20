@@ -5,7 +5,6 @@ import { createWrapper } from "next-redux-wrapper";
 import logger from "redux-logger";
 
 // list of reducers
-import aboutReducer from "features/about/store/about.slice";
 import userReducer from "features/user/store/user.slice";
 // saga
 import { rootSaga } from "store/rootSaga";
@@ -18,7 +17,6 @@ const makeStore = () => {
   //
   const store = configureStore({
     reducer: {
-      about: aboutReducer,
       user: userReducer,
     },
     devTools: process.env.NODE_ENV !== "production",
