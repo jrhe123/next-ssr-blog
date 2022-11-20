@@ -32,11 +32,11 @@ pages/pos/[...all].js -> /posts/*
 4.2 /article/[id] \
 4.3 /user/[id]
 
-5. NEXTJS middleware examples
+5. NEXTJS middleware examples \
 https://github.com/vercel/next.js/tree/canary/examples
 
-6. next-redux-wrapper
+6. next-redux-wrapper \
 https://github.com/kirill-konshin/next-redux-wrapper/issues/470
 
-7. next-redux-wrapper life circle methods
+7. next-redux-wrapper life circle methods \
 https://github.com/kirill-konshin/next-redux-wrapper#pagegetinitialprops
