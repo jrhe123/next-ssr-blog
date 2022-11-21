@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // ui
-import { Button, Dropdown, Avatar, Menu } from "antd";
+import { Button, Dropdown, Avatar, Menu, message } from "antd";
 import { LoginOutlined, HomeOutlined } from "@ant-design/icons";
 // others
 import { navs } from "./config";
@@ -16,7 +16,7 @@ import SigninPopupContainer from "features/user/components/SigninPopupContainer"
 import { useUserService } from "features/user";
 
 const Navbar: NextPage = () => {
-  const { pathname } = useRouter();
+  const { pathname, push } = useRouter();
   const [isShowSignin, setIsShowSignin] = useState<boolean>(false);
   const { user, signout } = useUserService();
 
@@ -24,6 +24,11 @@ const Navbar: NextPage = () => {
     e: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     e.preventDefault();
+    if (user?.userId) {
+      push("/editor/new");
+    } else {
+      message.warning("Please sign in..");
+    }
   };
 
   const handleClose = () => {
@@ -35,7 +40,9 @@ const Navbar: NextPage = () => {
     setIsShowSignin(true);
   };
 
-  const handleGoToProfilePage = () => {};
+  const handleGoToProfilePage = () => {
+    push(`/user/${user?.userId}`);
+  };
 
   const handleSignout = () => {
     signout();
