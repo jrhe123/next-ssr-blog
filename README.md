@@ -3,8 +3,7 @@ https://juejin.cn
 
 ### Setup
 1. linters
-2. mock.js \
-https://github.com/nuysoft/Mock/wiki/Getting-Started
+2. mock.js - https://github.com/nuysoft/Mock/wiki/Getting-Started
 
 ### UI - Antd
 https://ant.design/
