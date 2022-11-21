@@ -4,4 +4,7 @@ const nextConfig = {
   swcMinify: true,
 };
 
-module.exports = nextConfig;
+// mark down editor
+const removeImports = require("next-remove-imports")();
+
+module.exports = removeImports(nextConfig);

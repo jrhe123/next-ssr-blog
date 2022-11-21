@@ -10,14 +10,18 @@ import { wrapper } from "store";
 //
 import { Cookie } from "next-cookie";
 import { IncomingMessage } from "node:http";
+import { NextComponentType, NextPageContext } from "next";
 
 type User = {
   userId?: number;
   nickname?: string;
   avatar?: string;
 };
-type ICustomAppProps = AppProps & {
+type ICustomAppProps = Omit<AppProps, "Component"> & {
   user: User;
+  Component: NextComponentType<NextPageContext<any>, any, any> & {
+    hideLayout: boolean;
+  };
 };
 type IRequest = IncomingMessage & {
   cookies: Cookie;
@@ -37,13 +41,19 @@ const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
   });
   const { pageProps } = props;
 
-  return (
-    <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
-  );
+  const renderLayer = () => {
+    if (Component.hideLayout) {
+      return <Component {...pageProps} />;
+    } else {
+      return (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      );
+    }
+  };
+
+  return <Provider store={store}>{renderLayer()}</Provider>;
 };
 
 MyCustomApp.getInitialProps = async (context: AppContext) => {
