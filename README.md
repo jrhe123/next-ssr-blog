@@ -32,13 +32,14 @@ pages/pos/[...all].js -> /posts/*
 4.2 /article/[id] \
 4.3 /user/[id]
 
-5. NEXTJS middleware examples \
+### NEXTJS middleware examples
 https://github.com/vercel/next.js/tree/canary/examples
 
-6. next-redux-wrapper \
+### NEXTJS redux
+1. next-redux-wrapper \
 https://github.com/kirill-konshin/next-redux-wrapper/issues/470
 
-7. next-redux-wrapper life circle methods \
+2. next-redux-wrapper life circle methods \
 https://github.com/kirill-konshin/next-redux-wrapper#pagegetinitialprops
 
 - getServerSideProps vs getStaticProps
@@ -46,8 +47,6 @@ https://github.com/kirill-konshin/next-redux-wrapper#pagegetinitialprops
 - Static Generation (Recommended): The HTML is generated at build time and will be reused on each request. To make a page use Static Generation, either export the page component, or export getStaticProps (and getStaticPaths if necessary). It's great for pages that can be pre-rendered ahead of a user's request. You can also use it with Client-side Rendering to bring in additional data
 - Server-side Rendering: The HTML is generated on each request. To make a page use Server-side Rendering, export getServerSideProps. Because Server-side Rendering results in slower performance than Static Generation, use this only if absolutely necessary.
 
-8. Github oauth app \
-http://localhost:3000/api/oauth/redirect?code=xxx \
-
-new app: \
+### Github oauth app
 https://github.com/settings/applications/new \
+http://localhost:3000/api/oauth/redirect?code=xxx \
