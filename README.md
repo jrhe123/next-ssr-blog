@@ -49,4 +49,4 @@ https://github.com/kirill-konshin/next-redux-wrapper#pagegetinitialprops
 
 ### Github oauth app
 https://github.com/settings/applications/new \
-http://localhost:3000/api/oauth/redirect?code=xxx \
+http://localhost:3000/api/oauth/redirect?code=xxx
