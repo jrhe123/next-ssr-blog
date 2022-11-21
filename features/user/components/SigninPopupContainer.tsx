@@ -20,7 +20,11 @@ type SigninForm = {
   phone: string;
   verify: string;
 };
+
+// constants
 const regex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+const githubClientID = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
+const githubRedirectUri = process.env.NEXT_PUBLIC_GITHUB_REDIRECT_URI;
 
 const SigninPopupContainer: NextPage<SigninPopupContainerProps> = ({
   isShow = false,
@@ -87,6 +91,11 @@ const SigninPopupContainer: NextPage<SigninPopupContainerProps> = ({
 
   const handleOAuth = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
+    window.open(
+      `https://github.com/login/oauth/authorize?` +
+        `client_id=${githubClientID}&` +
+        `redirect_url=${githubRedirectUri}`
+    );
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -146,7 +155,7 @@ const SigninPopupContainer: NextPage<SigninPopupContainerProps> = ({
         </div>
         <div className={styles.loginPrivacy}>
           <a
-            href="https://github.com/jrhe123"
+            href="https://github.com/jrhe123/short_cut"
             target={"_blank"}
             rel={"noreferrer"}
           >
