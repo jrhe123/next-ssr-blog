@@ -1,5 +1,5 @@
 ### Project Clone
-1. https://juejin.cn \
+1. https://juejin.cn
 
 ### Setup
 1. linters
