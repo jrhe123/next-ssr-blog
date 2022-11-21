@@ -15,15 +15,10 @@ import SigninPopupContainer from "features/user/components/SigninPopupContainer"
 // redux service
 import { useUserService } from "features/user";
 
-const menuItems = [
-  { label: "Profile", key: "&nbsp;profile", icon: <HomeOutlined /> },
-  { label: "Sign out", key: "&nbsp;signout", icon: <LoginOutlined /> },
-];
-
 const Navbar: NextPage = () => {
   const { pathname } = useRouter();
   const [isShowSignin, setIsShowSignin] = useState<boolean>(false);
-  const { user } = useUserService();
+  const { user, signout } = useUserService();
 
   const handleGoToEditorPage = (
     e: React.MouseEvent<HTMLElement, MouseEvent>
@@ -40,14 +35,26 @@ const Navbar: NextPage = () => {
     setIsShowSignin(true);
   };
 
-  const renderDropDownMenu = () => {
-    return (
-      <Menu>
-        <Menu.Item>Profile</Menu.Item>
-        <Menu.Item>Sign out</Menu.Item>
-      </Menu>
-    );
+  const handleGoToProfilePage = () => {};
+
+  const handleSignout = () => {
+    signout();
   };
+
+  const menuItems = [
+    {
+      label: "Profile",
+      key: "&nbsp;profile",
+      icon: <HomeOutlined />,
+      onClick: handleGoToProfilePage,
+    },
+    {
+      label: "Sign out",
+      key: "&nbsp;signout",
+      icon: <LoginOutlined />,
+      onClick: handleSignout,
+    },
+  ];
 
   return (
     <div className={styles.navbar}>

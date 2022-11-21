@@ -7,7 +7,7 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import { getVerifyCode, signin } from "features/user/api";
+import { getVerifyCode, signin, signout } from "features/user/api";
 import { userActions } from "features/user/store/user.slice";
 import { VerifyCodeFormInput, SigninFormInput } from "features/user/types";
 // antd
@@ -48,10 +48,28 @@ function* onSignin({
   }
 }
 
+function* onSignout({
+  payload,
+}: {
+  type: typeof userActions.signoutRequest;
+  payload: void;
+}): SagaIterator {
+  const response = yield call(signout);
+  if (response.code === 0) {
+    message.success(response.message);
+    yield put(userActions.signoutSucceeded());
+  } else {
+    message.error(response.message || "API error");
+    const errors = [new Error(response.message)];
+    yield put(userActions.signoutFailed(errors));
+  }
+}
+
 // Watcher Saga
 export function* userWatcherSaga(): SagaIterator {
   yield takeEvery(userActions.getVerifyCodeRequest.type, onGetVerifyCode);
   yield takeEvery(userActions.signinRequest.type, onSignin);
+  yield takeEvery(userActions.signoutRequest.type, onSignout);
 }
 
 export default userWatcherSaga;

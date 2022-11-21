@@ -57,6 +57,19 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
+    // sign out
+    signoutRequest(state) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    signoutSucceeded(state) {
+      state.isLoading = false;
+      state.user = null;
+    },
+    signoutFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.errors = action.payload;
+    },
     // fetch user
     fetchUser(state, action: PayloadAction<User>) {
       state.user = action.payload;
@@ -89,6 +102,9 @@ export const userActions = {
   signinRequest: userSlice.actions.signinRequest,
   signinSucceeded: userSlice.actions.signinSucceeded,
   signinFailed: userSlice.actions.signinFailed,
+  signoutRequest: userSlice.actions.signoutRequest,
+  signoutSucceeded: userSlice.actions.signoutSucceeded,
+  signoutFailed: userSlice.actions.signoutFailed,
   fetchUser: userSlice.actions.fetchUser,
 };
 

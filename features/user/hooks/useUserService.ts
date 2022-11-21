@@ -13,6 +13,7 @@ export type UserServiceOperators = {
   user: User | null;
   getVerifyCode: (data: VerifyCodeFormInput) => void;
   signin: (data: SigninFormInput) => void;
+  signout: () => void;
   fetchUser: (date: User) => void;
 };
 
@@ -37,6 +38,9 @@ export const useUserService = (): Readonly<UserServiceOperators> => {
       },
       [dispatch]
     ),
+    signout: useCallback(() => {
+      dispatch(userActions.signoutRequest());
+    }, [dispatch]),
     fetchUser: useCallback(
       (user: User) => {
         dispatch(userActions.fetchUser(user));

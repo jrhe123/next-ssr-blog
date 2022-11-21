@@ -1,6 +1,6 @@
 import { Cookie } from "next-cookie";
 interface ICookie {
-  userId: number;
+  userId: number | string;
   nickname: string;
   avatar: string;
 }

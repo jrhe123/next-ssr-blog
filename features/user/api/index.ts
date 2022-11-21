@@ -17,3 +17,6 @@ export const getVerifyCode = (
 
 export const signin = (form: SigninFormInput): Promise<APIResponse<User>> =>
   api.post(USER_BASE_URL + "/login", form);
+
+export const signout = (): Promise<APIResponse<any>> =>
+  api.post(USER_BASE_URL + "/logout");
