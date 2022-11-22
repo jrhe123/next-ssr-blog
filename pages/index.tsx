@@ -1,22 +1,31 @@
 import type { NextPage } from "next";
-//
-import { wrapper } from "store";
-import { END } from "redux-saga";
 // db
 import { prepareConnection } from "db";
 import { Article } from "db/entity";
-//
+// redux
+import { END } from "redux-saga";
+import { wrapper } from "store";
 import { Article as IArticle } from "features/article/types";
-
+import { useArticleService } from "features/article";
+import ArticleListContainer from "features/article/components/ArticleListContainer";
+// style
+import styles from "./index.module.scss";
 interface IHomeProps {
   articles: IArticle[];
 }
 
 const Home: NextPage<IHomeProps> = ({ articles }) => {
-  console.log("articles: ", articles);
+  // we can use articles from page props
+  // OR
+  // get it from redux
+  // const {
+  //   // articles,
+  // } = useArticleService();
   return (
     <div>
-      <p>tag page</p>
+      <div className={styles.container}>
+        <ArticleListContainer articles={articles} />
+      </div>
     </div>
   );
 };

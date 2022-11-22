@@ -53,7 +53,7 @@ const handler = async (
   // response
   return res.status(200).json({
     code: 0,
-    message: "",
+    message: "Success",
     data: articleRes,
   });
 };

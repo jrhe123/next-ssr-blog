@@ -67,6 +67,7 @@ export const articleActions = {
 
 // Selectors
 export const selectIsLoading = (state: RootState) => state.article.isLoading;
+export const selectArticles = (state: RootState) => state.article.articles;
 
 // Reducer
 export default articleSlice.reducer;
