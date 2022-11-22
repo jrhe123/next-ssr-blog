@@ -33,7 +33,7 @@ pages/pos/[...all].js -> /posts/*
 
 ### NEXTJS rendering
 SSR: \
-page: Home, \
+* page: Home, \
 SSG: \
 CSR: \
 
