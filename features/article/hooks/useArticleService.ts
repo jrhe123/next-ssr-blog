@@ -4,6 +4,7 @@ import {
   articleActions,
   selectIsLoading,
   selectArticles,
+  selectArticle,
 } from "features/article/store";
 import { Article, ArticleFormInput } from "features/article/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -11,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 export type ArticleServiceOperators = {
   isLoading: boolean;
   articles: Article[];
+  article: Article | null;
   publishArticle: (data: ArticleFormInput) => void;
 };
 
@@ -23,6 +25,7 @@ export const useArticleService = (): Readonly<ArticleServiceOperators> => {
   return {
     isLoading: useAppSelector(selectIsLoading),
     articles: useAppSelector(selectArticles),
+    article: useAppSelector(selectArticle),
     publishArticle: useCallback(
       (form: ArticleFormInput) => {
         dispatch(articleActions.publishArticleRequest(form));

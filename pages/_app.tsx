@@ -39,6 +39,7 @@ const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
         },
         article: {
           articles: rest.pageProps.articles,
+          article: rest.pageProps.article,
         },
       },
     },

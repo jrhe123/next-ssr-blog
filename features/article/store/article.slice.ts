@@ -13,12 +13,14 @@ import type { RootState } from "store";
 export interface ArticleState {
   isLoading: boolean;
   articles: Article[];
+  article: Article | null;
   errors?: Error[];
 }
 
 const initialState: ArticleState = {
   isLoading: false,
   articles: [],
+  article: null,
   errors: [],
 };
 
@@ -45,12 +47,13 @@ export const articleSlice = createSlice({
       .addCase(HYDRATE, (state, action) => {
         const {
           payload: {
-            article: { articles },
+            article: { articles, article },
           },
         } = action as any;
         const nextState = {
           ...state,
           articles,
+          article,
         };
         return nextState;
       })
@@ -68,6 +71,7 @@ export const articleActions = {
 // Selectors
 export const selectIsLoading = (state: RootState) => state.article.isLoading;
 export const selectArticles = (state: RootState) => state.article.articles;
+export const selectArticle = (state: RootState) => state.article.article;
 
 // Reducer
 export default articleSlice.reducer;

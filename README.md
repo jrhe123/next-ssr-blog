@@ -33,12 +33,15 @@ pages/pos/[...all].js -> /posts/*
 
 ### NEXTJS rendering
 #### SSR:
-page: Home,
+page: Home (Article List), Article Detail, 
 #### SSG:
 #### CSR:
 
 doc: \
 https://github.com/vercel/next.js/discussions/11873
+
+### NEXTJS cors image domains
+https://images.unsplash.com
 
 ### NEXTJS middleware examples
 https://github.com/vercel/next.js/tree/canary/examples
