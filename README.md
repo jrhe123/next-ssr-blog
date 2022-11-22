@@ -32,10 +32,10 @@ pages/pos/[...all].js -> /posts/*
 4.3 /user/[id]
 
 ### NEXTJS rendering
-SSR: \
-* page: Home, \
-SSG: \
-CSR: \
+#### SSR: \
+page: Home,
+#### SSG:
+#### CSR:
 
 doc: \
 https://github.com/vercel/next.js/discussions/11873
