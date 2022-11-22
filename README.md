@@ -31,6 +31,15 @@ pages/pos/[...all].js -> /posts/*
 4.2 /article/[id] \
 4.3 /user/[id]
 
+### NEXTJS rendering
+SSR: \
+- page: Home, \
+SSG: \
+CSR: \
+
+doc: \
+https://github.com/vercel/next.js/discussions/11873
+
 ### NEXTJS middleware examples
 https://github.com/vercel/next.js/tree/canary/examples
 

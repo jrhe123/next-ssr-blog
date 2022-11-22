@@ -30,24 +30,31 @@ type IRequest = IncomingMessage & {
 const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
   const { store, props } = wrapper.useWrappedStore({
     ...rest,
-    // pass it to hydrate slice & assign to reducer
+    // pass it to hydrate slice & assign to redux reducer
     pageProps: {
       initialState: {
+        // if you want to hydrate slices
         user: {
           user: rest.user,
+        },
+        article: {
+          articles: rest.pageProps.articles,
         },
       },
     },
   });
-  const { pageProps } = props;
-
+  // props in page props directly
+  const combinedProps = {
+    ...props.pageProps, // getInitialProps
+    ...rest.pageProps, // getServerSideProps from page
+  };
   const renderLayer = () => {
     if (Component.hideLayout) {
-      return <Component {...pageProps} />;
+      return <Component {...combinedProps} />;
     } else {
       return (
         <Layout>
-          <Component {...pageProps} />
+          <Component {...combinedProps} />
         </Layout>
       );
     }

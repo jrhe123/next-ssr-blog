@@ -2,8 +2,18 @@ import type { NextPage } from "next";
 //
 import { wrapper } from "store";
 import { END } from "redux-saga";
+// db
+import { prepareConnection } from "db";
+import { Article } from "db/entity";
+//
+import { Article as IArticle } from "features/article/types";
 
-const Home: NextPage = (props) => {
+interface IHomeProps {
+  articles: IArticle[];
+}
+
+const Home: NextPage<IHomeProps> = ({ articles }) => {
+  console.log("articles: ", articles);
   return (
     <div>
       <p>tag page</p>
@@ -14,26 +24,19 @@ const Home: NextPage = (props) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ query, req }) => {
-      // store.dispatch(tickClock(false))
-      // if (!store.getState().placeholderData) {
-      //   store.dispatch(loadData())
-      //   store.dispatch(END)
-      // }
-      // await store.sagaTask.toPromise();
-
-      // console.log('store state on the server before dispatch', store.getState());
-      // const response = await fetch(
-      //     `https://reqres.in/api/users/${Math.floor(Math.random() * 10 + 1)}`
-      // );
-      // const { data } = await response.json();
-      // const data2 = data.first_name;
-      // store.dispatch(setProfileData(`${data.first_name}`));
-
+      // SSR fetch data
+      const db = await prepareConnection();
+      const articleRepo = db.getRepository(Article);
+      const articles = await articleRepo.find({
+        relations: ["user"],
+      });
+      const formatted = JSON.parse(JSON.stringify(articles));
       return {
-        props: {},
+        props: {
+          articles: formatted || [],
+        },
       };
     }
 );
-// https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
 
 export default Home;

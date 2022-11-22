@@ -12,11 +12,13 @@ import type { RootState } from "store";
 
 export interface ArticleState {
   isLoading: boolean;
+  articles: Article[];
   errors?: Error[];
 }
 
 const initialState: ArticleState = {
   isLoading: false,
+  articles: [],
   errors: [],
 };
 
@@ -41,8 +43,14 @@ export const articleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(HYDRATE, (state, action) => {
+        const {
+          payload: {
+            article: { articles },
+          },
+        } = action as any;
         const nextState = {
           ...state,
+          articles,
         };
         return nextState;
       })
