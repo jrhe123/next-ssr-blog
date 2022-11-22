@@ -32,7 +32,7 @@ pages/pos/[...all].js -> /posts/*
 4.3 /user/[id]
 
 ### NEXTJS rendering
-#### SSR: \
+#### SSR:
 page: Home,
 #### SSG:
 #### CSR:
