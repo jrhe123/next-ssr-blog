@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+// react
+import React, { useState, useEffect } from "react";
 //
 import { wrapper } from "store";
 import { END } from "redux-saga";
