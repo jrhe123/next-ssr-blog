@@ -36,6 +36,7 @@ pages/pos/[...all].js -> /posts/*
 Home (Article List), Article Detail, Edit Article Detail
 #### SSG:
 #### CSR:
+Tag (Tag List)
 
 doc: \
 https://github.com/vercel/next.js/discussions/11873

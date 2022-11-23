@@ -13,13 +13,13 @@ const Tag: NextPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ query, req }) => {
-      return {
-        props: {},
-      };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ query, req }) => {
+//       return {
+//         props: {},
+//       };
+//     }
+// );
 
 export default Tag;
