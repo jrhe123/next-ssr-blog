@@ -4,6 +4,11 @@ export type ArticleFormInput = {
   content: string;
 };
 
+export type CommentFormInput = {
+  articleId: number;
+  content: string;
+};
+
 type User = {
   id: number;
   nickname: string;
@@ -21,6 +26,16 @@ export type Article = {
   update_time: Date;
   is_delete: number;
   user: User;
+  comments?: Comment[];
+};
+
+export type Comment = {
+  id: number;
+  content: string;
+  create_time: Date;
+  update_time: Date;
+  user: User;
+  article: Article;
 };
 
 export type APIResponse<T> = {

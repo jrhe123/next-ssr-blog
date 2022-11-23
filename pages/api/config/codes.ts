@@ -19,3 +19,10 @@ export const EXCEPTION_ARTICLE = {
     message: "NOT_FOUND_ARTICLE",
   },
 };
+
+export const EXCEPTION_COMMENT = {
+  PUBLISH_FAILED: {
+    code: 3001,
+    message: "PUBLISH_FAILED",
+  },
+};

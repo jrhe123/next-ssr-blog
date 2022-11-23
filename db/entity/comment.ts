@@ -5,15 +5,20 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
-  OneToMany,
 } from "typeorm";
+import { Article } from "./article";
 import { User } from "./user";
-import { Comment } from "./comment";
 
-@Entity({ name: "articles" })
-export class Article extends BaseEntity {
+@Entity({ name: "comments" })
+export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   readonly id!: number;
+
+  @ManyToOne(() => Article, {
+    cascade: true,
+  })
+  @JoinColumn({ name: "article_id" })
+  article!: Article;
 
   @ManyToOne(() => User, {
     cascade: true,
@@ -21,24 +26,12 @@ export class Article extends BaseEntity {
   @JoinColumn({ name: "user_id" })
   user!: User;
 
-  @OneToMany(() => Comment, (comment) => comment.article)
-  comments!: Comment[];
-
-  @Column("text", { nullable: true })
-  title!: string;
-
   @Column("text", { nullable: true })
   content!: string;
-
-  @Column("int", { nullable: false })
-  views!: number;
 
   @Column("datetime", { nullable: true })
   create_time!: Date;
 
   @Column("datetime", { nullable: true })
   update_time!: Date;
-
-  @Column("int", { nullable: false })
-  is_delete!: number;
 }

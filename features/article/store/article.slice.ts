@@ -7,7 +7,12 @@ import {
 } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
-import { Article, ArticleFormInput } from "features/article/types";
+import {
+  Article,
+  ArticleFormInput,
+  Comment,
+  CommentFormInput,
+} from "features/article/types";
 import type { RootState } from "store";
 
 export interface ArticleState {
@@ -29,7 +34,7 @@ export const articleSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
-    // publish
+    // publish article
     publishArticleRequest(state, action: PayloadAction<ArticleFormInput>) {
       state.isLoading = true;
       state.errors = [];
@@ -41,7 +46,7 @@ export const articleSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
-    // update
+    // update article
     updateArticleRequest(state, action: PayloadAction<ArticleFormInput>) {
       state.isLoading = true;
       state.errors = [];
@@ -50,6 +55,25 @@ export const articleSlice = createSlice({
       state.isLoading = false;
     },
     updateArticleFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.errors = action.payload;
+    },
+    // publish comment
+    publishCommentRequest(state, action: PayloadAction<CommentFormInput>) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    publishCommentSucceeded(state, action: PayloadAction<Comment>) {
+      // append comment to the end of list
+      if (state.article) {
+        if (!state.article.comments?.length) {
+          state.article.comments = [];
+        }
+        state.article.comments.push(action.payload);
+      }
+      state.isLoading = false;
+    },
+    publishCommentFailed(state, action: PayloadAction<Error[]>) {
       state.isLoading = false;
       state.errors = action.payload;
     },
@@ -75,14 +99,18 @@ export const articleSlice = createSlice({
 
 // Actions
 export const articleActions = {
-  // publish
+  // publish article
   publishArticleRequest: articleSlice.actions.publishArticleRequest,
   publishArticleSucceeded: articleSlice.actions.publishArticleSucceeded,
   publishArticleFailed: articleSlice.actions.publishArticleFailed,
-  // update
+  // update article
   updateArticleRequest: articleSlice.actions.updateArticleRequest,
   updateArticleSucceeded: articleSlice.actions.updateArticleSucceeded,
   updateArticleFailed: articleSlice.actions.updateArticleFailed,
+  // publish comment
+  publishCommentRequest: articleSlice.actions.publishCommentRequest,
+  publishCommentSucceeded: articleSlice.actions.publishCommentSucceeded,
+  publishCommentFailed: articleSlice.actions.publishCommentFailed,
 };
 
 // Selectors

@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { Connection, getConnection, createConnection } from "typeorm";
 //
-import { User, UserAuth, Article } from "./entity";
+import { User, UserAuth, Article, Comment } from "./entity";
 
 const {
   MYSQL_HOST = "",
@@ -31,7 +31,7 @@ export const prepareConnection = () => {
         password: MYSQL_PASSWORD,
         database: MYSQL_DATABASE,
         // list of entities
-        entities: [User, UserAuth, Article],
+        entities: [User, UserAuth, Article, Comment],
         synchronize: false,
         logging: true,
       });

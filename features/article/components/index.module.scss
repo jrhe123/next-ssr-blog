@@ -88,3 +88,16 @@
     }
   }
 }
+
+.enter {
+  display: flex;
+
+  .content {
+    flex: 1;
+    margin-left: 20px;
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}
