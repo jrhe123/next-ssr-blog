@@ -8,17 +8,23 @@ import dynamic from "next/dynamic";
 import { Input, Button, message } from "antd";
 //
 import styles from "./index.module.scss";
-//
+// redux
 import { useArticleService } from "../hooks";
-
-interface PublishArticleContainerProps {}
+import { Article as IArticle } from "features/article/types";
+interface PublishArticleContainerProps {
+  article?: IArticle;
+}
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
-const PublishArticleContainer: NextPage<PublishArticleContainerProps> = () => {
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
-  const { publishArticle } = useArticleService();
+const PublishArticleContainer: NextPage<PublishArticleContainerProps> = ({
+  article,
+}) => {
+  const [title, setTitle] = useState<string>(article ? article.title : "");
+  const [content, setContent] = useState<string>(
+    article ? article.content : ""
+  );
+  const { publishArticle, updateArticle } = useArticleService();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -40,10 +46,18 @@ const PublishArticleContainer: NextPage<PublishArticleContainerProps> = () => {
       message.warning("Please enter content");
       return;
     }
-    publishArticle({
-      title,
-      content,
-    });
+    if (article?.id) {
+      updateArticle({
+        id: article.id,
+        title,
+        content,
+      });
+    } else {
+      publishArticle({
+        title,
+        content,
+      });
+    }
   };
 
   return (
@@ -60,10 +74,10 @@ const PublishArticleContainer: NextPage<PublishArticleContainerProps> = () => {
           type={"primary"}
           onClick={handlePublish}
         >
-          Publish
+          {article?.id ? "Update" : "Publish"}
         </Button>
       </div>
-      <MDEditor value={content} height={300} onChange={handleContentChange} />
+      <MDEditor value={content} height={900} onChange={handleContentChange} />
     </div>
   );
 };

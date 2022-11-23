@@ -7,9 +7,7 @@ import styles from "./index.module.scss";
 //
 import PublishArticleContainer from "features/article/components/PublishArticleContainer";
 
-interface NewEditorProps {
-  host: string;
-}
+interface NewEditorProps {}
 
 const NewEditor: NextPage<NewEditorProps> = () => {
   return (

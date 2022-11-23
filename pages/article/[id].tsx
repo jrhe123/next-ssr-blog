@@ -3,17 +3,14 @@ import Link from "next/link";
 // react
 import { useState } from "react";
 // antd
-import { Avatar, Input, Button, message, Divider } from "antd";
+import { Avatar, Input, Button, Divider } from "antd";
 import MarkDown from "markdown-to-jsx";
 import { format } from "date-fns";
 // db
 import { prepareConnection } from "db";
 import { Article } from "db/entity";
 // redux
-import { END } from "redux-saga";
-import { wrapper } from "store";
 import { Article as IArticle } from "features/article/types";
-import { useArticleService } from "features/article";
 import { useUserService } from "features/user";
 // style
 import styles from "./index.module.scss";
@@ -55,9 +52,9 @@ const ArticleDetail: NextPage<IArticleDetailProps> = ({ article }) => {
           <MarkDown className={styles.markdown}>{article?.content}</MarkDown>
         </div>
         <div className={styles.divider}></div>
-        <div className="content-layout">
+        <div className={styles.content_layout}>
           <div className={styles.comment}>
-            <h3>Comments</h3>
+            <h3 className={styles.comment_title}>Comments</h3>
             {user?.userId && (
               <div className={styles.enter}>
                 <Avatar src={avatar} size={40} />

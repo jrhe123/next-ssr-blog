@@ -41,6 +41,18 @@ export const articleSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
+    // update
+    updateArticleRequest(state, action: PayloadAction<ArticleFormInput>) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    updateArticleSucceeded(state) {
+      state.isLoading = false;
+    },
+    updateArticleFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.errors = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -63,9 +75,14 @@ export const articleSlice = createSlice({
 
 // Actions
 export const articleActions = {
+  // publish
   publishArticleRequest: articleSlice.actions.publishArticleRequest,
   publishArticleSucceeded: articleSlice.actions.publishArticleSucceeded,
   publishArticleFailed: articleSlice.actions.publishArticleFailed,
+  // update
+  updateArticleRequest: articleSlice.actions.updateArticleRequest,
+  updateArticleSucceeded: articleSlice.actions.updateArticleSucceeded,
+  updateArticleFailed: articleSlice.actions.updateArticleFailed,
 };
 
 // Selectors

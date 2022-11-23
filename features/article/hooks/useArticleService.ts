@@ -14,6 +14,7 @@ export type ArticleServiceOperators = {
   articles: Article[];
   article: Article | null;
   publishArticle: (data: ArticleFormInput) => void;
+  updateArticle: (data: ArticleFormInput) => void;
 };
 
 /**
@@ -29,6 +30,12 @@ export const useArticleService = (): Readonly<ArticleServiceOperators> => {
     publishArticle: useCallback(
       (form: ArticleFormInput) => {
         dispatch(articleActions.publishArticleRequest(form));
+      },
+      [dispatch]
+    ),
+    updateArticle: useCallback(
+      (form: ArticleFormInput) => {
+        dispatch(articleActions.updateArticleRequest(form));
       },
       [dispatch]
     ),

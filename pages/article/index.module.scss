@@ -6,12 +6,14 @@
 
 .content_layout {
   max-width: 720px;
+  width: 100%;
   overflow: hidden;
   background: white;
 }
 
 .content_container {
   padding: 24px;
+  width: 100%;
 }
 
 .title {
@@ -46,8 +48,10 @@
 }
 
 .markdown {
+  width: 100%;
   img {
     width: 100%;
+    display: block;
   }
 }
 
@@ -57,12 +61,17 @@
 }
 
 .comment {
+  padding: 24px;
+
+  .comment_title {
+    margin-bottom: 24px;
+  }
+
   .enter {
     display: flex;
-    // align-items: center;
 
     .content {
-      width: 600px;
+      flex: 1;
       margin-left: 20px;
 
       button {
@@ -84,7 +93,6 @@
       display: flex;
       flex-direction: column;
       margin-left: 20px;
-      // width: 100%;
 
       .name {
         display: flex;

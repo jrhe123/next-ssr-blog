@@ -1,4 +1,5 @@
 export type ArticleFormInput = {
+  id?: number;
   title: string;
   content: string;
 };
