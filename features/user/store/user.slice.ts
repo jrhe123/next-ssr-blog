@@ -84,10 +84,13 @@ export const userSlice = createSlice({
             user: { user },
           },
         } = action as any;
+        const cookieUser: User = user;
         const nextState = {
           ...state,
-          user,
         };
+        if (cookieUser.userId) {
+          nextState.user = cookieUser;
+        }
         return nextState;
       })
       .addDefaultCase((state, action) => {});
