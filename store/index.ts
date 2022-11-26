@@ -7,6 +7,7 @@ import logger from "redux-logger";
 // list of reducers
 import userReducer from "features/user/store/user.slice";
 import articleReducer from "features/article/store/article.slice";
+import tagReducer from "features/tag/store/tag.slice";
 // saga
 import { rootSaga } from "store/rootSaga";
 
@@ -20,6 +21,7 @@ const makeStore = () => {
     reducer: {
       user: userReducer,
       article: articleReducer,
+      tag: tagReducer,
     },
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddleware) =>

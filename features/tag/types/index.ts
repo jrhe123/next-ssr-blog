@@ -1,12 +1,14 @@
-export type ArticleFormInput = {
-  id?: number;
-  title: string;
-  content: string;
-};
+import * as ANTD_ICON_TYPE from "@ant-design/icons/lib/index";
 
-export type CommentFormInput = {
-  articleId: number;
-  content: string;
+export type Tag = {
+  id: number;
+  title: string;
+  // icon: typeof ANTD_ICON_TYPE;
+  icon: string;
+  follow_count: number;
+  article_count: number;
+  users: User[];
+  articles: Article[];
 };
 
 type User = {

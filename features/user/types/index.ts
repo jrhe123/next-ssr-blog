@@ -16,6 +16,6 @@ export type User = {
 
 export type APIResponse<T> = {
   code: number;
-  msg?: string;
+  message?: string;
   data?: T;
 };
