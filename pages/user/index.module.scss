@@ -1,0 +1,170 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.userDetail {
+  max-width: 720px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    width: 70%;
+    background-color: #fff;
+    padding: 20px;
+
+    .userInfo {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+
+      .avatar {
+        margin-right: 50px;
+      }
+
+      .nickname {
+        font-size: 20px;
+        font-weight: bolder;
+        margin-bottom: 8px;
+      }
+
+      .desc {
+        color: #72777b;
+        margin-bottom: 5px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 12px;
+          height: 12px;
+          margin-right: 10px;
+        }
+      }
+
+      button {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  .right {
+    width: 30%;
+    height: 180px;
+    background-color: #fff;
+
+    .achievement {
+      height: 180px;
+
+      .header {
+        height: 50px;
+        border-bottom: 1px solid #f3f3f3;
+        padding: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+
+      .number {
+        padding: 20px;
+
+        .wrapper {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            fill: #89b7f9;
+          }
+        }
+      }
+    }
+  }
+}
+
+.userProfile {
+  .form {
+    width: 500px;
+    margin-top: 40px;
+  }
+}
+
+
+.list_item_container {
+  margin: 0 atuo;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 24px;
+
+  .article {
+    width: 90%;
+
+    .userInfo {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+
+      span {
+        padding: 0 10px;
+        border-right: 1px solid #e5e6eb;
+      }
+
+      span:first-of-type {
+        padding-left: 0;
+      }
+
+      span:last-of-type {
+        border-right: 0;
+      }
+
+      .name {
+        color: #4e5969;
+      }
+
+      .name:hover {
+        text-decoration: underline;
+        color: #1e80ff;
+      }
+
+      .date {
+        color: #86909c;
+      }
+    }
+
+    .title {
+      font-size: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .content {
+      font-size: 16px;
+      color: #86909c;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .statistics {
+      display: flex;
+      align-items: center;
+
+      .item {
+        margin-left: 5px;
+      }
+    }
+  }
+}

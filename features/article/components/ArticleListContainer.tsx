@@ -72,7 +72,7 @@ const ArticleListContainer: NextPage<IArticleListContainerProps> = ({
         ))}
       </div>
       <div>
-        {articles.map((article, index) => (
+        {articles?.map((article, index) => (
           <Link key={index} href={`/article/${article.id}`}>
             <div className={styles.list_item_container}>
               <div className={styles.article}>
