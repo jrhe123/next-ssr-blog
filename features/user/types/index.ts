@@ -8,6 +8,12 @@ export type SigninFormInput = {
   identity_type: string;
 };
 
+export type UpdateProfileFormInput = {
+  nickname: string;
+  job: string;
+  introduce: string;
+};
+
 export type User = {
   userId: number;
   nickname: string;

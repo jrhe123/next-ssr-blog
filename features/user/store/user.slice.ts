@@ -11,18 +11,21 @@ import {
   SigninFormInput,
   User,
   VerifyCodeFormInput,
+  UpdateProfileFormInput,
 } from "features/user/types";
 import type { RootState } from "store";
 
 export interface UserState {
   isLoading: boolean;
   user: User | null;
+  profile: User | null;
   errors?: Error[];
 }
 
 const initialState: UserState = {
   isLoading: false,
   user: null,
+  profile: null,
   errors: [],
 };
 
@@ -70,6 +73,37 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
+    // get user detail
+    getUserDetailRequest(state) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    getUserDetailSucceeded(state, action: PayloadAction<User>) {
+      state.isLoading = false;
+      state.profile = action.payload;
+    },
+    getUserDetailFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.profile = null;
+      state.errors = action.payload;
+    },
+    // update user detail
+    updateUserDetailRequest(
+      state,
+      action: PayloadAction<UpdateProfileFormInput>
+    ) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    updateUserDetailSucceeded(state, action: PayloadAction<User>) {
+      state.isLoading = false;
+      state.profile = action.payload;
+    },
+    updateUserDetailFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.profile = null;
+      state.errors = action.payload;
+    },
     // fetch user
     fetchUser(state, action: PayloadAction<User>) {
       state.user = action.payload;
@@ -108,12 +142,20 @@ export const userActions = {
   signoutRequest: userSlice.actions.signoutRequest,
   signoutSucceeded: userSlice.actions.signoutSucceeded,
   signoutFailed: userSlice.actions.signoutFailed,
+  getUserDetailRequest: userSlice.actions.getUserDetailRequest,
+  getUserDetailSucceeded: userSlice.actions.getUserDetailSucceeded,
+  getUserDetailFailed: userSlice.actions.getUserDetailFailed,
+  updateUserDetailRequest: userSlice.actions.updateUserDetailRequest,
+  updateUserDetailSucceeded: userSlice.actions.updateUserDetailSucceeded,
+  updateUserDetailFailed: userSlice.actions.updateUserDetailFailed,
+  //
   fetchUser: userSlice.actions.fetchUser,
 };
 
 // Selectors
 export const selectIsLoading = (state: RootState) => state.user.isLoading;
 export const selectUser = (state: RootState) => state.user.user;
+export const selectProfile = (state: RootState) => state.user.profile;
 
 // Reducer
 export default userSlice.reducer;

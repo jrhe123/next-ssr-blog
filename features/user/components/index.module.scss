@@ -112,3 +112,16 @@
     }
   }
 }
+
+.content_layout {
+  max-width: 720px;
+  width: 100%;
+  overflow: hidden;
+  background: white;
+  padding: 24px;
+}
+.userProfile {
+  .form {
+    margin-top: 40px;
+  }
+}

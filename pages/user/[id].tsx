@@ -58,19 +58,21 @@ const UserProfile: NextPage<UserProps> = ({ userInfo, userArticles }) => {
       <div className={styles.userDetail}>
         {/* left */}
         <div className={styles.left}>
-          <div className={styles.userInfo}>
+          <div className={styles.userInfo_v2}>
             <Avatar className={styles.avatar} src={userInfo.avatar} size={90} />
-            <div className={styles.nickname}>{userInfo.nickname}</div>
-            <div className={styles.desc}>
-              <CodeOutlined /> {userInfo.job}
+            <div>
+              <div className={styles.nickname}>{userInfo.nickname}</div>
+              <div className={styles.desc}>
+                <CodeOutlined /> {userInfo.job}
+              </div>
+              <div className={styles.desc}>
+                <FireOutlined /> {userInfo.introduce}
+              </div>
             </div>
-            <div className={styles.desc}>
-              <FireOutlined /> {userInfo.introduce}
-            </div>
+            <Link href={"/user/profile"}>
+              <Button>Edit</Button>
+            </Link>
           </div>
-          <Link href={"/user/profile"}>
-            <Button>Edit</Button>
-          </Link>
           <Divider />
           {/* article list */}
           <div className={styles.article}>
@@ -80,7 +82,7 @@ const UserProfile: NextPage<UserProps> = ({ userInfo, userArticles }) => {
                   <div className={styles.article}>
                     <div className={styles.userInfo}>
                       <span className={styles.name}>
-                        {article.user?.nickname}
+                        {article.user?.nickname}&nbsp;
                       </span>
                       <span className={styles.date}>
                         {formatDistanceToNow(new Date(article?.update_time))}

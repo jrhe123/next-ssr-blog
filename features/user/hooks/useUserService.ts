@@ -1,19 +1,29 @@
 import { useCallback } from "react";
 
-import { userActions, selectIsLoading, selectUser } from "features/user/store";
+import {
+  userActions,
+  selectIsLoading,
+  selectUser,
+  selectProfile,
+} from "features/user/store";
 import {
   User,
   VerifyCodeFormInput,
   SigninFormInput,
+  UpdateProfileFormInput,
 } from "features/user/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 export type UserServiceOperators = {
   isLoading: boolean;
   user: User | null;
+  profile: User | null;
   getVerifyCode: (data: VerifyCodeFormInput) => void;
   signin: (data: SigninFormInput) => void;
   signout: () => void;
+  getUserDetail: () => void;
+  updateUserDetail: (data: UpdateProfileFormInput) => void;
+  //
   fetchUser: (date: User) => void;
 };
 
@@ -26,6 +36,7 @@ export const useUserService = (): Readonly<UserServiceOperators> => {
   return {
     isLoading: useAppSelector(selectIsLoading),
     user: useAppSelector(selectUser),
+    profile: useAppSelector(selectProfile),
     getVerifyCode: useCallback(
       (form: VerifyCodeFormInput) => {
         dispatch(userActions.getVerifyCodeRequest(form));
@@ -41,6 +52,16 @@ export const useUserService = (): Readonly<UserServiceOperators> => {
     signout: useCallback(() => {
       dispatch(userActions.signoutRequest());
     }, [dispatch]),
+    getUserDetail: useCallback(() => {
+      dispatch(userActions.getUserDetailRequest());
+    }, [dispatch]),
+    updateUserDetail: useCallback(
+      (form: UpdateProfileFormInput) => {
+        dispatch(userActions.updateUserDetailRequest(form));
+      },
+      [dispatch]
+    ),
+    //
     fetchUser: useCallback(
       (user: User) => {
         dispatch(userActions.fetchUser(user));

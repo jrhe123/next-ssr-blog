@@ -3,6 +3,7 @@ import makeApi from "libs/core/configureAxios";
 import {
   VerifyCodeFormInput,
   SigninFormInput,
+  UpdateProfileFormInput,
   User,
   APIResponse,
 } from "../types";
@@ -20,3 +21,10 @@ export const signin = (form: SigninFormInput): Promise<APIResponse<User>> =>
 
 export const signout = (): Promise<APIResponse<any>> =>
   api.post(USER_BASE_URL + "/logout");
+
+export const getUserDetail = (): Promise<APIResponse<User>> =>
+  api.get(USER_BASE_URL + "/detail");
+
+export const updateUserDetail = (
+  form: UpdateProfileFormInput
+): Promise<APIResponse<User>> => api.put(USER_BASE_URL + "/update", form);

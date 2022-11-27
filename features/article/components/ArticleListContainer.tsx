@@ -78,6 +78,7 @@ const ArticleListContainer: NextPage<IArticleListContainerProps> = ({
               <div className={styles.article}>
                 <div className={styles.userInfo}>
                   <span className={styles.name}>{article.user?.nickname}</span>
+                  &nbsp;
                   <span className={styles.date}>
                     {formatDistanceToNow(new Date(article?.update_time))}
                   </span>
