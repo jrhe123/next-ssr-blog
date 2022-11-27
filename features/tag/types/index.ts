@@ -1,9 +1,16 @@
-import * as ANTD_ICON_TYPE from "@ant-design/icons/lib/index";
+enum FollowType {
+  FOLLOW = "FOLLOW",
+  UN_FOLLOW = "UN_FOLLOW",
+}
+
+export type ToggleFollowTagFormInput = {
+  type: FollowType;
+  tagId: number;
+};
 
 export type Tag = {
   id: number;
   title: string;
-  // icon: typeof ANTD_ICON_TYPE;
   icon: string;
   follow_count: number;
   article_count: number;

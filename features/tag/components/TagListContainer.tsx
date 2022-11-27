@@ -17,18 +17,33 @@ enum TAB {
   ALL = "ALL",
 }
 
+enum FollowType {
+  FOLLOW = "FOLLOW",
+  UN_FOLLOW = "UN_FOLLOW",
+}
+
 const TagListContainer: NextPage = () => {
   const [currentTab, setCurrentTag] = useState<TAB>(TAB.FOLLOW);
-  const { getTags, allTags, followTags } = useTagService();
+  const { getTags, toggleFollowTag, allTags, followTags } = useTagService();
   const { user } = useUserService();
 
   useEffect(() => {
     getTags();
   }, [getTags]);
 
-  const handleUnfollow = (tag: Tag) => {};
+  const handleUnfollow = (tag: Tag) => {
+    toggleFollowTag({
+      type: FollowType.UN_FOLLOW,
+      tagId: tag.id,
+    });
+  };
 
-  const handleFollow = (tag: Tag) => {};
+  const handleFollow = (tag: Tag) => {
+    toggleFollowTag({
+      type: FollowType.FOLLOW,
+      tagId: tag.id,
+    });
+  };
 
   return (
     <div className={styles.content_layout}>
@@ -48,13 +63,15 @@ const TagListContainer: NextPage = () => {
               <div key={index} className={styles.tagWrapper}>
                 <div>{((ANTD_ICONS as any)[tag.icon] as any).render()}</div>
                 <div className={styles.title}>{tag.title}</div>
+                <br />
                 <div>{tag.follow_count} follows</div>
                 <div>{tag.article_count} articles</div>
+                <br />
                 {tag.users.find(
-                  (user) => Number(user.id) === Number(user.id)
+                  (u) => Number(u.id) === Number(user?.userId)
                 ) ? (
                   <Button type={"primary"} onClick={() => handleUnfollow(tag)}>
-                    Followed
+                    Unfollow
                   </Button>
                 ) : (
                   <Button onClick={() => handleFollow(tag)}>Follow</Button>
@@ -68,13 +85,15 @@ const TagListContainer: NextPage = () => {
               <div key={index} className={styles.tagWrapper}>
                 <div>{((ANTD_ICONS as any)[tag.icon] as any).render()}</div>
                 <div className={styles.title}>{tag.title}</div>
+                <br />
                 <div>{tag.follow_count} follows</div>
                 <div>{tag.article_count} articles</div>
+                <br />
                 {tag.users.find(
-                  (user) => Number(user.id) === Number(user.id)
+                  (u) => Number(u.id) === Number(user?.userId)
                 ) ? (
                   <Button type={"primary"} onClick={() => handleUnfollow(tag)}>
-                    Followed
+                    Unfollow
                   </Button>
                 ) : (
                   <Button onClick={() => handleFollow(tag)}>Follow</Button>

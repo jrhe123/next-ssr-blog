@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
-import { Tag } from "features/tag/types";
+import { Tag, ToggleFollowTagFormInput } from "features/tag/types";
 import type { RootState } from "store";
 
 export interface TagState {
@@ -49,6 +49,29 @@ export const tagSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
+    // toggle follow tag
+    toggleFollowTagRequest(
+      state,
+      action: PayloadAction<ToggleFollowTagFormInput>
+    ) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    toggleFollowTagSucceeded(
+      state,
+      action: PayloadAction<{
+        followTags: Tag[];
+        allTags: Tag[];
+      }>
+    ) {
+      state.isLoading = false;
+      state.followTags = action.payload.followTags;
+      state.allTags = action.payload.allTags;
+    },
+    toggleFollowTagFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.errors = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -68,6 +91,10 @@ export const tagActions = {
   getTagsRequest: tagSlice.actions.getTagsRequest,
   getTagsSucceeded: tagSlice.actions.getTagsSucceeded,
   getTagsFailed: tagSlice.actions.getTagsFailed,
+  // toggle tag
+  toggleFollowTagRequest: tagSlice.actions.toggleFollowTagRequest,
+  toggleFollowTagSucceeded: tagSlice.actions.toggleFollowTagSucceeded,
+  toggleFollowTagFailed: tagSlice.actions.toggleFollowTagFailed,
 };
 
 // Selectors

@@ -6,7 +6,7 @@ import {
   selectFollowTags,
   selectAllTags,
 } from "features/tag/store";
-import { Tag } from "features/tag/types";
+import { Tag, ToggleFollowTagFormInput } from "features/tag/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 export type TagServiceOperators = {
@@ -14,6 +14,7 @@ export type TagServiceOperators = {
   followTags: Tag[];
   allTags: Tag[];
   getTags: () => void;
+  toggleFollowTag: (form: ToggleFollowTagFormInput) => void;
 };
 
 /**
@@ -29,6 +30,12 @@ export const useTagService = (): Readonly<TagServiceOperators> => {
     getTags: useCallback(() => {
       dispatch(tagActions.getTagsRequest());
     }, [dispatch]),
+    toggleFollowTag: useCallback(
+      (form: ToggleFollowTagFormInput) => {
+        dispatch(tagActions.toggleFollowTagRequest(form));
+      },
+      [dispatch]
+    ),
   };
 };
 
