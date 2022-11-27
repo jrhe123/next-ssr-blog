@@ -26,3 +26,10 @@ export const EXCEPTION_COMMENT = {
     message: "PUBLISH_FAILED",
   },
 };
+
+export const EXCEPTION_TAG = {
+  NOT_FOUND_TAG: {
+    code: 4001,
+    message: "NOT_FOUND_TAG",
+  },
+};
