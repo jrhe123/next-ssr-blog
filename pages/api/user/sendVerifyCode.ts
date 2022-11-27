@@ -27,15 +27,15 @@ const handler = async (
   // random code
   const verifyCode = Math.floor(Math.random() * (9999 - 1000)) + 1000;
   console.log("verifyCode: ", verifyCode);
-  // const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
-  // const response = await client.messages.create({
-  //   from: TWILIO_NUMBER,
-  //   to,
-  //   body: "NEXT EARTH:\nyour code: " + verifyCode,
-  // });
-  // if (response.errorMessage) {
-  //   return res.status(401).json({ code: -1, message: "SMS service error" });
-  // }
+  const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
+  const response = await client.messages.create({
+    from: TWILIO_NUMBER,
+    to,
+    body: "NEXT EARTH:\nyour code: " + verifyCode,
+  });
+  if (response.errorMessage) {
+    return res.status(401).json({ code: -1, message: "SMS service error" });
+  }
   // save it into session
   session.verifyCode = verifyCode;
   await session.save();
