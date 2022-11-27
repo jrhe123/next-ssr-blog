@@ -12,9 +12,14 @@ import {
   publishArticle,
   updateArticle,
   publishComment,
+  getArticle,
 } from "features/article/api";
 import { articleActions } from "features/article/store/article.slice";
-import { ArticleFormInput, CommentFormInput } from "features/article/types";
+import {
+  ArticleFormInput,
+  CommentFormInput,
+  GetArticleFormInput,
+} from "features/article/types";
 // antd
 import { message } from "antd";
 // route
@@ -88,11 +93,29 @@ function* onPublishComment({
   }
 }
 
+function* onGetArticle({
+  payload,
+}: {
+  type: typeof articleActions.getArticleRequest;
+  payload: GetArticleFormInput;
+}): SagaIterator {
+  const response = yield call(getArticle, payload);
+  if (response.code === 0) {
+    // action
+    yield put(articleActions.getArticleSucceeded(response.data));
+  } else {
+    message.error(response.message || "API error");
+    const errors = [new Error(response.message)];
+    yield put(articleActions.getArticleFailed(errors));
+  }
+}
+
 // Watcher Saga
 export function* articleWatcherSaga(): SagaIterator {
   yield takeEvery(articleActions.publishArticleRequest.type, onPublishArticle);
   yield takeEvery(articleActions.updateArticleRequest.type, onUpdateArticle);
   yield takeEvery(articleActions.publishCommentRequest.type, onPublishComment);
+  yield takeEvery(articleActions.getArticleRequest.type, onGetArticle);
 }
 
 export default articleWatcherSaga;

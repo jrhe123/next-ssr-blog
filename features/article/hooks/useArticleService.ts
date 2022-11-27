@@ -10,6 +10,7 @@ import {
   Article,
   ArticleFormInput,
   CommentFormInput,
+  GetArticleFormInput,
 } from "features/article/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
@@ -20,6 +21,7 @@ export type ArticleServiceOperators = {
   publishArticle: (data: ArticleFormInput) => void;
   updateArticle: (data: ArticleFormInput) => void;
   publishComment: (data: CommentFormInput) => void;
+  getArticle: (data: GetArticleFormInput) => void;
 };
 
 /**
@@ -47,6 +49,12 @@ export const useArticleService = (): Readonly<ArticleServiceOperators> => {
     publishComment: useCallback(
       (form: CommentFormInput) => {
         dispatch(articleActions.publishCommentRequest(form));
+      },
+      [dispatch]
+    ),
+    getArticle: useCallback(
+      (form: GetArticleFormInput) => {
+        dispatch(articleActions.getArticleRequest(form));
       },
       [dispatch]
     ),

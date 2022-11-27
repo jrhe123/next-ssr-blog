@@ -16,17 +16,15 @@ interface IHomeProps {
   allTags: ITag[];
 }
 
-const Home: NextPage<IHomeProps> = ({ articles, allTags }) => {
+const Home: NextPage<IHomeProps> = ({ allTags }) => {
   // we can use articles from page props
   // OR
   // get it from redux
-  // const {
-  //   // articles,
-  // } = useArticleService();
+  const { articles } = useArticleService();
   return (
     <div>
       <div className={styles.container}>
-        <ArticleListContainer articles={articles} />
+        <ArticleListContainer articles={articles} tags={allTags} />
       </div>
     </div>
   );

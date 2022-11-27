@@ -101,3 +101,35 @@
     }
   }
 }
+
+.tags {
+  height: 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .tag {
+    padding: 10px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-right: 10px;
+    font-size: 9px;
+    cursor: pointer;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin: 0;
+    }
+  }
+
+  .active {
+    background-color: #007fff;
+    color: #fff;
+  }
+}

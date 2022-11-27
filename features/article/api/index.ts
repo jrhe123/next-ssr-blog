@@ -6,6 +6,7 @@ import {
   CommentFormInput,
   Comment,
   APIResponse,
+  GetArticleFormInput,
 } from "../types";
 
 const api = makeApi("/");
@@ -25,3 +26,9 @@ export const publishComment = (
   form: CommentFormInput
 ): Promise<APIResponse<Comment>> =>
   api.post(COMMENT_BASE_URL + "/publish", form);
+
+export const getArticle = (
+  form: GetArticleFormInput
+): Promise<APIResponse<Article[]>> => {
+  return api.get(ARTICLE_BASE_URL + `/get?tagId=${form.tagId}`);
+};

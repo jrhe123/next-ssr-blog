@@ -1,3 +1,7 @@
+export type GetArticleFormInput = {
+  tagId?: number | string;
+};
+
 export type ArticleFormInput = {
   id?: number;
   title: string;

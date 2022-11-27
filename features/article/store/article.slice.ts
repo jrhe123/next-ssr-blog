@@ -12,6 +12,7 @@ import {
   ArticleFormInput,
   Comment,
   CommentFormInput,
+  GetArticleFormInput,
 } from "features/article/types";
 import type { RootState } from "store";
 
@@ -77,6 +78,19 @@ export const articleSlice = createSlice({
       state.isLoading = false;
       state.errors = action.payload;
     },
+    // get articles
+    getArticleRequest(state, action: PayloadAction<GetArticleFormInput>) {
+      state.isLoading = true;
+      state.errors = [];
+    },
+    getArticleSucceeded(state, action: PayloadAction<Article[]>) {
+      state.articles = action.payload;
+      state.isLoading = false;
+    },
+    getArticleFailed(state, action: PayloadAction<Error[]>) {
+      state.isLoading = false;
+      state.errors = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -111,6 +125,10 @@ export const articleActions = {
   publishCommentRequest: articleSlice.actions.publishCommentRequest,
   publishCommentSucceeded: articleSlice.actions.publishCommentSucceeded,
   publishCommentFailed: articleSlice.actions.publishCommentFailed,
+  // get article
+  getArticleRequest: articleSlice.actions.getArticleRequest,
+  getArticleSucceeded: articleSlice.actions.getArticleSucceeded,
+  getArticleFailed: articleSlice.actions.getArticleFailed,
 };
 
 // Selectors
