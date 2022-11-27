@@ -30,9 +30,7 @@ export class Tag extends BaseEntity {
   })
   users!: User[];
 
-  @ManyToMany(() => Article, {
-    cascade: true,
-  })
+  @ManyToMany(() => Article, (article) => article.tags)
   @JoinTable({
     name: "articles_tags_rel",
     joinColumn: {

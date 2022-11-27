@@ -2,6 +2,7 @@ export type ArticleFormInput = {
   id?: number;
   title: string;
   content: string;
+  tagIds: number[];
 };
 
 export type CommentFormInput = {
@@ -27,6 +28,17 @@ export type Article = {
   is_delete: number;
   user: User;
   comments?: Comment[];
+  tags: Tag[];
+};
+
+export type Tag = {
+  id: number;
+  title: string;
+  icon: string;
+  follow_count: number;
+  article_count: number;
+  users: User[];
+  articles: Article[];
 };
 
 export type Comment = {

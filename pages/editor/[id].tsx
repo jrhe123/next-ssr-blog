@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps =
       where: {
         id: Number(id),
       },
-      relations: ["user"],
+      relations: ["user", "tags"],
     });
     // return
     const formatted = JSON.parse(JSON.stringify(article));
