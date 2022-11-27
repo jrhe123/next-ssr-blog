@@ -31,7 +31,9 @@ const ArticleListContainer: NextPage<IArticleListContainerProps> = ({
       return;
     }
     const tagid = e.target.dataset["tagid"];
-    setSelectTag(Number(tagid));
+    if (tagid) {
+      setSelectTag(Number(tagid));
+    }
   };
 
   useEffect(() => {
