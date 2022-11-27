@@ -1,35 +1,45 @@
-.navbar {
-  height: 60px;
-  background-color: #fff;
-  border-bottom: 1px solid #f1f1f1;
+.container {
+  width: 100%;
+  background: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
-
-  .logoArea {
-    font-size: 18px;
-    font-weight: bolder;
-    margin-right: 60px;
-  }
-
-  .linkArea {
-    a {
-      font-size: 12px;
-      padding: 0 15px;
-      color: #515767;
+  .navbar {
+    height: 60px;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width:  840px;
+  
+    .logoArea {
+      font-size: 18px;
+      font-weight: bolder;
     }
-
-    .active {
-      color: #1e80ff;
+  
+    @media screen and (max-width: 480px) {
+      .logoArea {
+        display: none;
+      }
     }
-  }
-
-  .operationArea {
-    margin-left: 150px;
-
-    button {
-      margin-right: 12px;
-      font-size: 12px;
+  
+    .linkArea {
+      a {
+        font-size: 12px;
+        padding: 0 15px;
+        color: #515767;
+      }
+  
+      .active {
+        color: #1e80ff;
+      }
+    }
+  
+    .operationArea {
+      button {
+        margin-right: 12px;
+        font-size: 12px;
+      }
     }
   }
 }

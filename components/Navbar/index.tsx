@@ -64,39 +64,41 @@ const Navbar: NextPage = () => {
   ];
 
   return (
-    <div className={styles.navbar}>
-      <section className={styles.logoArea}>Rare Earth</section>
-      <section className={styles.linkArea}>
-        {navs?.map((nav, index) => (
-          <Link key={index} href={nav?.value} legacyBehavior>
-            <a className={pathname === nav?.value ? styles.active : ""}>
-              {nav.label}
-            </a>
-          </Link>
-        ))}
-      </section>
-      <section className={styles.operationArea}>
-        {/* btn 1 */}
-        <Button onClick={handleGoToEditorPage}>Post</Button>
-        {/* btn 2 */}
-        {user?.userId ? (
-          <>
-            <Dropdown menu={{ items: menuItems }} placement={"bottomLeft"}>
-              <Avatar
-                src={user.avatar}
-                size={32}
-                style={{ cursor: "pointer" }}
-              />
-            </Dropdown>
-          </>
-        ) : (
-          <Button onClick={handleSignin} type={"primary"}>
-            SignIn
-          </Button>
-        )}
-      </section>
-      {/* popup */}
-      <SigninPopupContainer isShow={isShowSignin} onClose={handleClose} />
+    <div className={styles.container}>
+      <div className={styles.navbar}>
+        <section className={styles.logoArea}>Rare Earth</section>
+        <section className={styles.linkArea}>
+          {navs?.map((nav, index) => (
+            <Link key={index} href={nav?.value} legacyBehavior>
+              <a className={pathname === nav?.value ? styles.active : ""}>
+                {nav.label}
+              </a>
+            </Link>
+          ))}
+        </section>
+        <section className={styles.operationArea}>
+          {/* btn 1 */}
+          <Button onClick={handleGoToEditorPage}>Post</Button>
+          {/* btn 2 */}
+          {user?.userId ? (
+            <>
+              <Dropdown menu={{ items: menuItems }} placement={"bottomLeft"}>
+                <Avatar
+                  src={user.avatar}
+                  size={32}
+                  style={{ cursor: "pointer" }}
+                />
+              </Dropdown>
+            </>
+          ) : (
+            <Button onClick={handleSignin} type={"primary"}>
+              SignIn
+            </Button>
+          )}
+        </section>
+        {/* popup */}
+        <SigninPopupContainer isShow={isShowSignin} onClose={handleClose} />
+      </div>
     </div>
   );
 };

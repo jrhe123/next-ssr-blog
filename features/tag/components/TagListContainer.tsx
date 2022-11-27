@@ -81,7 +81,7 @@ const TagListContainer: NextPage = () => {
         </TabPane>
         <TabPane tab="Hashtags" key={TAB.ALL} className={styles.tags}>
           {currentTab === TAB.ALL &&
-            allTags.map((tag, index) => (
+            allTags?.map((tag, index) => (
               <div key={index} className={styles.tagWrapper}>
                 <div>{((ANTD_ICONS as any)[tag.icon] as any).render()}</div>
                 <div className={styles.title}>{tag.title}</div>

@@ -95,7 +95,7 @@ const PublishArticleContainer: NextPage<PublishArticleContainerProps> = ({
           onChange={handleSelectTags}
           value={tagIds}
         >
-          {allTags.map((tag) => (
+          {allTags?.map((tag) => (
             <Select.Option key={tag.id} value={tag.id}>
               {tag.title}
             </Select.Option>

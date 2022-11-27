@@ -1,5 +1,6 @@
 .container {
   margin: 0 auto;
+  width: 100%;
 
   .operation {
     display: flex;
@@ -21,6 +22,7 @@
 
 .list_item_container {
   margin: 0 atuo;
+  margin-bottom: 12px;
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -103,15 +105,15 @@
 }
 
 .tags {
-  height: 40px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
 
   .tag {
     padding: 10px;
-    height: 30px;
     border-radius: 5px;
     background-color: #fff;
     margin-right: 10px;
