@@ -41,6 +41,9 @@ const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
           articles: rest.pageProps.articles,
           article: rest.pageProps.article,
         },
+        tag: {
+          allTags: rest.pageProps.allTags,
+        },
       },
     },
   });

@@ -76,8 +76,14 @@ export const tagSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(HYDRATE, (state, action) => {
+        const {
+          payload: {
+            tag: { allTags },
+          },
+        } = action as any;
         const nextState = {
           ...state,
+          allTags,
         };
         return nextState;
       })
