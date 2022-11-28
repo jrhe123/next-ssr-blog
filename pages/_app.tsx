@@ -29,6 +29,44 @@ type IRequest = IncomingMessage & {
   cookies: Cookie;
 };
 
+export function reportWebVitals(mertic: any) {
+  // logging performance
+  switch (mertic.name) {
+    case "FCP":
+      console.log("FCP", mertic);
+      break;
+    case "LCP":
+      console.log("LCP", mertic);
+      break;
+    case "CLS":
+      console.log("CLS", mertic);
+      break;
+    case "FID":
+      console.log("FID", mertic);
+      break;
+    case "TTFB":
+      console.log("TTFB", mertic);
+      break;
+    default:
+      break;
+  }
+  // google plugin - lighthouse
+  // navigator.sendBeacon
+  // async send data, won't delay page unload
+  // https://www.educative.io/answers/what-is-sendbeacon-in-javascript
+  // const url = "xxxx";
+  // const data = JSON.stringify(mertic);
+  // if (navigator.sendBeacon) {
+  //   navigator.sendBeacon(url, data);
+  // } else {
+  //   fetch(url, {
+  //     body: data,
+  //     method: "POST",
+  //     keepalive: true,
+  //   });
+  // }
+}
+
 const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
   const { store, props } = wrapper.useWrappedStore({
     ...rest,
