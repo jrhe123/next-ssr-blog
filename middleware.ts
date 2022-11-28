@@ -10,7 +10,8 @@ export function middleware(req: NextRequest) {
     // console.log(req.geo);
   }
 
-  // 2. redirect
+  // 2. redirect page - auth
+  // eg: RBAC
   if (req?.nextUrl?.pathname === "/tag") {
     // return NextResponse?.redirect('/user/2');
   }

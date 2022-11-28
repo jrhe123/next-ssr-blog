@@ -45,7 +45,12 @@ https://github.com/vercel/next.js/discussions/11873
 ### NEXTJS cors image domains
 https://images.unsplash.com
 
-### NEXTJS middleware examples
+### NEXTJS middleware
+- global handler
+
+### NEXTJS dynamic import
+- dynamic import component when it's needed
+### NEXTJS state examples
 https://github.com/vercel/next.js/tree/canary/examples
 
 ### NEXTJS redux
