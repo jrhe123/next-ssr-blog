@@ -7,7 +7,6 @@ export function middleware(req: NextRequest) {
   if (!PUBLIC_PATH.test(req?.nextUrl?.pathname)) {
     // console.log(req.nextUrl.href);
     // console.log(req.referrer);
-    // console.log(req.ua);
     // console.log(req.geo);
   }
 
