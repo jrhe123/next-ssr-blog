@@ -68,8 +68,18 @@ const Navbar: NextPage = () => {
       <div className={styles.navbar}>
         <section className={styles.logoArea}>Rare Earth</section>
         <section className={styles.linkArea}>
+          {/* NOTE */}
+          {/* show info/:id as SSG example */}
           {navs?.map((nav, index) => (
-            <Link key={index} href={nav?.value} legacyBehavior>
+            <Link
+              key={index}
+              href={
+                nav.label === "Info"
+                  ? nav?.value + "/" + user?.userId
+                  : nav?.value
+              }
+              legacyBehavior
+            >
               <a className={pathname === nav?.value ? styles.active : ""}>
                 {nav.label}
               </a>

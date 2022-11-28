@@ -33,11 +33,11 @@ pages/pos/[...all].js -> /posts/*
 
 ### NEXTJS rendering
 #### SSR:
-Home (Article List), Article Detail, Edit Article Detail \
-User Profile
+Home (Article List), Article Detail, Edit Article Detail, User Profile
 #### SSG:
+Info Page => info/:id
 #### CSR:
-Tag (Tag List), User Update Form
+Tag (Tag List), User Profile Update
 
 doc: \
 https://github.com/vercel/next.js/discussions/11873
