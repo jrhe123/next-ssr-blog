@@ -11,6 +11,8 @@ import { wrapper } from "store";
 import { Cookie } from "next-cookie";
 import { IncomingMessage } from "node:http";
 import { NextComponentType, NextPageContext } from "next";
+// error boundary handles
+import ErrorBoundary from "components/ErrorBoundary";
 
 type User = {
   userId?: number;
@@ -64,7 +66,11 @@ const MyCustomApp = ({ Component, ...rest }: ICustomAppProps) => {
     }
   };
 
-  return <Provider store={store}>{renderLayer()}</Provider>;
+  return (
+    <ErrorBoundary>
+      <Provider store={store}>{renderLayer()}</Provider>
+    </ErrorBoundary>
+  );
 };
 
 MyCustomApp.getInitialProps = async (context: AppContext) => {
